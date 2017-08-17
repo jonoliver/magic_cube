@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+  <script type="text/javascript">
+    // window.addEventListener("deviceorientation", (e) => console.log(e), true);
+    // window.ondevicemotionevent = (e) => console.log(e)
+  </script>
+  <script src="http://192.168.0.6:3000/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io('http://192.168.0.6:3000');
+    console.log(socket);
+    socket.on('connect', function(){  console.log('connected');});
+    socket.on('disconnect', function(){});
+
+    socket.on('update', function(data){
+      // console.log(data);
+      const { alpha, beta, gamma } = data;
+      const r = Math.round(Math.abs(alpha));
+      const g = Math.round(Math.abs(beta));
+      const b = Math.round(Math.abs(gamma));
+      console.log(r,g,b);
+      document.querySelector('body').style.background = `rgb(${r}, ${g}, ${b})`;
+    });
+
+    window.ondeviceorientation = (e) => {
+      console.log(e);
+      const { alpha, beta, gamma } = e;
+      socket.emit('event', { alpha, beta, gamma });
+
+      function theremin() {
+        var muted = false;
+        var volume = 0;
+
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        var oscillator = audioCtx.createOscillator();
+        var gainNode = audioCtx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        oscillator.type = "sine";
+        oscillator.frequency.value = 220;
+        oscillator.start();
+
+        document.addEventListener("mousemove", updateTone);
+        document.addEventListener("mousemove", updateVisual);
+
+        function updateTone(e) {
+          freq = e.pageX;
+          volume = e.pageY;
+          if (muted) return;
+          oscillator.frequency.value = freq;
+          gainNode.gain.value = volume;
+        }
+
+        var vibratoRate = 50;
+        var vibratoInterval = setInterval(vibrato, vibratoRate);
+
+        var detuneVal = 30;
+        var detuneMultiplier = 10;
+
+        function vibrato() {
+          detuneMultiplier = detuneMultiplier * -1;
+          oscillator.detune.value = detuneVal * detuneMultiplier;
+        }
+
+        document.onkeydown = handleKey;
+        $("#volume").click(mute);
+
+        function handleKey(e) {
+          e.preventDefault();
+          switch (e.key) {
+            case " ":
+              mute();
+            case "ArrowDown":
+              if (detuneVal > 0) detuneVal--;
+              console.log(detuneVal);
+              break;
+            case "ArrowUp":
+              detuneVal++;
+              console.log(detuneVal);
+              break;
+          }
+        }
+
+        function mute() {
+          muted = !muted;
+          if (muted) {
+            gainNode.gain.value = 0;
+            $("#volume").removeClass("fa-volume-up").addClass("fa-volume-off");
+          } else {
+            gainNode.gain.value = volume;
+            $("#volume").removeClass("fa-volume-off").addClass("fa-volume-up");
+          }
+        }
+        function updateVisual(e) {
+          pointer = $('<div class="tracer"></div>');
+
+          $(document.body).append(pointer);
+          pointer
+            .css({
+              position: "absolute",
+              top: e.pageY,
+              left: e.pageX,
+              width: 10,
+              height: 10,
+              borderRadius: 10
+            })
+            .animate({ width: 20, height: 20 })
+            .fadeOut(400, function() {
+              $(this).remove();
+            });
+        }
+        
+      }
+    }
+
+  </script>
+  </body>
+</html>
