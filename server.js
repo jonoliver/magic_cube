@@ -1,6 +1,22 @@
-var io = require('socket.io')();
-console.log('running');
-io.on('connection', function(socket){
+var replace = require('stream-replace');
+const Koa = require('koa');
+const app = new Koa();
+
+const HOST = process.env.HOST || 'http://192.168.0.6';
+const PORT = process.env.PORT || 3000;
+const ROOTPATH = `http://${HOST}:${PORT}`;
+
+app.use(async (ctx, next) => {
+  await next();
+  ctx.body = ctx.body.pipe(replace(/\$SOCKET_SERVER/g, ROOTPATH));
+});
+
+app.use(require('koa-static')('.', {defer: true}));
+
+const IO = require( 'koa-socket' )
+const io = new IO()
+io.attach( app )
+app._io.on( 'connection', socket => {
   console.log('connected');
   socket.on('update', function(data){
     socket.broadcast.to('room').emit('update', data)
@@ -10,6 +26,7 @@ io.on('connection', function(socket){
   });
   socket.join('room');
   socket.on('disconnect', function(){});
+})
 
-});
-io.listen(3000);
+app.listen(PORT);
+console.log(`Listening on ${ROOTPATH}`);

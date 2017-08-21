@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "socket.io": "^2.0.3"
+    "koa": "^2.3.0",
+    "koa-socket": "^4.4.0",
+    "koa-static": "^4.0.1",
+    "stream-replace": "^1.0.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "HOST=192.168.0.6 PORT=9000 node --inspect server.js"
   },
   "author": "",
   "license": "ISC"
