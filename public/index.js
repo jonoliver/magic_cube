@@ -11,11 +11,11 @@ socket.on('update', renderFromOrientationData);
 
 // MOBILE ONLY
 // TODO: check for mobile device
-window.ondeviceorientation = (e) => {
+window.addEventListener('deviceorientation', (e) => {
   const { alpha, beta, gamma } = e;
   renderFromOrientationData(e);
   socket.emit('update', { alpha, beta, gamma });
-}
+});
 
 // shared functionality
 socket.on('tap', updateColorSelection);
