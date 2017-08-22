@@ -8,7 +8,7 @@ const ROOTPATH = `http://${HOST}:${PORT}`;
 
 app.use(require('koa-browser-sync')({
   init: true,
-  files: '*',
+  files: 'public/*',
   notify: false
 }));
 
@@ -18,11 +18,11 @@ app.use(async (ctx, next) => {
   ctx.body = ctx.body.pipe(replace(/\$SOCKET_SERVER/g, ROOTPATH));
 });
 
-app.use(require('koa-static')('.', {defer: true}));
+app.use(require('koa-static')('public/', {defer: true}));
 
-const IO = require( 'koa-socket' )
-const io = new IO()
-io.attach( app )
+const IO = require( 'koa-socket' );
+const io = new IO();
+io.attach( app );
 app._io.on( 'connection', socket => {
   console.log('connected');
   socket.on('update', function(data){

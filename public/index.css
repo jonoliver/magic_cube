@@ -1,0 +1,19 @@
+body {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #FFF;
+  opacity: .65;
+}
+.square {
+  height: 40px;
+  width: 40px;
+  background: #FFF;
+  display: inline-block;
+  margin: 1rem;
+  opacity: .65;
+}
+.result {
+  /*text-shadow: #000000 1px 1px 1px, #ffffff -1px -1px 1px;*/
+}
