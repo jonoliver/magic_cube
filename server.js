@@ -6,8 +6,15 @@ const HOST = process.env.HOST || 'http://192.168.0.6';
 const PORT = process.env.PORT || 3000;
 const ROOTPATH = `http://${HOST}:${PORT}`;
 
+app.use(require('koa-browser-sync')({
+  init: true,
+  files: '*',
+  notify: false
+}));
+
 app.use(async (ctx, next) => {
   await next();
+  if (!ctx.body) { return; }
   ctx.body = ctx.body.pipe(replace(/\$SOCKET_SERVER/g, ROOTPATH));
 });
 
