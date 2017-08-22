@@ -10,10 +10,11 @@
     "stream-replace": "^1.0.0"
   },
   "devDependencies": {
-    "koa-browser-sync": "^1.0.1"
+    "koa-browser-sync": "^1.0.1",
+    "nodemon": "^1.11.0"
   },
   "scripts": {
-    "start": "HOST=192.168.0.6 PORT=9000 node --inspect server.js"
+    "start": "HOST=192.168.0.6 PORT=9000 ./node_modules/nodemon/bin/nodemon.js --watch server.js --inspect server.js"
   },
   "author": "",
   "license": "ISC"
