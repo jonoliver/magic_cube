@@ -59,7 +59,8 @@ function updateColorSelection(){
 }
 
 function updateSquares(alpha, beta, gamma){
-  document.querySelector('.square1').style.transform = `rotate(${alpha}deg)`;
+  document.querySelector('.square1').style.transform = `rotate(${alpha * -1}deg)`;
   document.querySelector('.square2').style.transform = `rotate(${beta}deg)`;
   document.querySelector('.square3').style.transform = `rotate(${gamma}deg)`;
+  document.querySelector('.cube').style.transform = `rotateX(${(beta - 70) * -1}deg) rotateY(${gamma}deg) rotateZ(${alpha * -1}deg`;
 }

@@ -1,4 +1,5 @@
 body {
+  background: #000;
   text-align: center;
   font-family: sans-serif;
   font-size: 5rem;
@@ -7,13 +8,54 @@ body {
   opacity: .65;
 }
 .square {
-  height: 40px;
-  width: 40px;
+  height: 100px;
+  width: 100px;
   background: #FFF;
   display: inline-block;
-  margin: 1rem;
+  margin: 3rem;
   opacity: .65;
+  background: linear-gradient(0deg, #FFF, #666);
 }
 .result {
   /*text-shadow: #000000 1px 1px 1px, #ffffff -1px -1px 1px;*/
+}
+.cube {
+  position: relative;
+  margin: 80px auto;
+  height: 200px;
+  width: 200px;
+  transform-style:preserve-3d;
+}
+.cube div {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  -moz-cube-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+  animation:rotate 15s infinite linear;
+  opacity: 0.7
+}
+
+.cube div.side1 {
+  background:rgba(0, 170, 255, 0.7);
+  transform:translateZ(100px);
+}
+.cube div.side2 {
+  background:rgba(206, 210, 5, 0.7);
+  transform:rotateY(90deg) translateZ(100px);
+}
+.cube div.side3 {
+  background:rgba(66, 183, 99, 0.7);
+  transform:rotateY(180deg) translateZ(100px);
+}
+.cube div.side4 {
+  background: rgba(158, 194, 228, 0.7);
+  transform:rotateY(-90deg) translateZ(100px);
+}
+.cube div.side5 {
+  background:rgba(255, 109, 109, 0.7);
+  transform:rotateX(-90deg) translateZ(100px) rotate(180deg);
+}
+.cube div.side6 {
+  background:rgba(242, 255, 181,.7);
+  transform:rotateX(90deg) translateZ(100px);
 }
