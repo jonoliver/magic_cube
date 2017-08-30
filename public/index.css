@@ -7,15 +7,82 @@ body {
   color: #FFF;
   opacity: .65;
 }
+.eye-container {
+  position: relative;
+  z-index: 4;
+  display: inline-block;
+  padding: 50px;
+  background: #2eca2e;
+  border-radius: 200px;
+  margin: 0 -40px;
+  border: 9px #398826 solid;
+}
+
+.eye-container.outer {
+  z-index: 10;
+}
+.eye-container.inner {
+  padding: 80px;
+}
+.eye-shadow {
+  position: relative;
+  z-index: 3;
+  margin: 0 auto;
+  background: #9e9c9c;
+  height: 237px;
+  width: 258px;
+  border-radius: 126px;
+  margin-top: -241px;
+}
+
+
+.teeth {
+  position: relative;
+  z-index: 2;
+  height: 237px;
+  width: 243px;
+  background: #ffffff;
+  margin: 0 auto;
+  border-radius: 126px;
+  margin-top: -199px;
+  border: 5px #398826 solid;
+}
+
+.chin {
+  position: relative;
+  margin: 0 auto;
+  margin-top: -203px;
+  z-index: 1;
+  background: #2da22d;
+  border-radius: 155px;
+  height: 266px;
+  width: 295px;
+  border: 9px #2c631f solid;
+}
+
+
 .square {
   height: 100px;
   width: 100px;
+  border-radius: 50px;
   background: #FFF;
-  display: inline-block;
   margin: 3rem;
-  opacity: .65;
-  background: linear-gradient(0deg, #FFF, #666);
+  /*opacity: .65;*/
+  /*box-shadow: 1px 1px 2rem #bbbbbb;*/
+  background: #FFF;
+  border: 3px #398826 solid;
 }
+
+.square div {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: black;
+  top: 20px;
+  right: 20px;
+  border-radius: 10px;
+}
+
 .result {
   /*text-shadow: #000000 1px 1px 1px, #ffffff -1px -1px 1px;*/
 }
@@ -26,36 +93,51 @@ body {
   width: 200px;
   transform-style:preserve-3d;
 }
+
 .cube div {
   position: absolute;
   height: 200px;
   width: 200px;
   -moz-cube-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
   animation:rotate 15s infinite linear;
-  opacity: 0.7
 }
 
+.cube.deconstructed {
+  opacity: 0.5;
+}
+
+.cube.deconstructed div {
+  position: relative;
+}
+
+
 .cube div.side1 {
+  background:rgba(0,102,153,.5);
   background:rgba(0, 170, 255, 0.7);
   transform:translateZ(100px);
 }
 .cube div.side2 {
+  background:rgba(150,153,0,.7);
   background:rgba(206, 210, 5, 0.7);
   transform:rotateY(90deg) translateZ(100px);
 }
 .cube div.side3 {
+  background:rgba(39,116,61,.7);
   background:rgba(66, 183, 99, 0.7);
   transform:rotateY(180deg) translateZ(100px);
 }
 .cube div.side4 {
+  background:rgba(105,136,165,.7);
   background: rgba(158, 194, 228, 0.7);
   transform:rotateY(-90deg) translateZ(100px);
 }
 .cube div.side5 {
+  background:rgba(223,48,48,.7);
   background:rgba(255, 109, 109, 0.7);
   transform:rotateX(-90deg) translateZ(100px) rotate(180deg);
 }
 .cube div.side6 {
+  background:rgba(144,153,102,.7);
   background:rgba(242, 255, 181,.7);
   transform:rotateX(90deg) translateZ(100px);
 }
