@@ -14,15 +14,17 @@ body {
   padding: 50px;
   background: #2eca2e;
   border-radius: 200px;
-  margin: 0 -40px;
+  margin: 0 -48px;
   border: 9px #398826 solid;
 }
 
 .eye-container.outer {
   z-index: 10;
+  width: 180px;
 }
 .eye-container.inner {
-  padding: 80px;
+  padding: 92px;
+  padding-top: 167px;
 }
 .eye-shadow {
   position: relative;
@@ -35,13 +37,12 @@ body {
   margin-top: -241px;
 }
 
-
 .teeth {
   position: relative;
   z-index: 2;
   height: 237px;
   width: 243px;
-  background: #ffffff;
+  background: linear-gradient(89deg, #fff 29%, #000 20%,#000 50%,#fff 50%, #fff 50%, #fff 75%, #000 75%, #000 85%, #fff 75%);
   margin: 0 auto;
   border-radius: 126px;
   margin-top: -199px;
@@ -51,12 +52,12 @@ body {
 .chin {
   position: relative;
   margin: 0 auto;
-  margin-top: -203px;
+  margin-top: -270px;
   z-index: 1;
   background: #2da22d;
-  border-radius: 155px;
-  height: 266px;
-  width: 295px;
+  border-radius: 290px;
+  height: 340px;
+  width: 330px;
   border: 9px #2c631f solid;
 }
 
@@ -64,7 +65,7 @@ body {
 .square {
   height: 100px;
   width: 100px;
-  border-radius: 50px;
+  border-radius: 100px;
   background: #FFF;
   margin: 3rem;
   /*opacity: .65;*/
