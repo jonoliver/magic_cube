@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controls</title>
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    body {background: #687f94 !important;}
+  </style>
+</head>
+<body>
+  <div class="control control1"><div></div></div>
+  <div class="control control2"><div></div></div>
+  <div class="control control3"><div></div></div>
+<div class="result"></div>
+<script type="text/javascript">
+  function updatePage(alpha, beta, gamma){
+    document.querySelector('.control1').style.transform = `rotate(${alpha * -1}deg)`;
+    document.querySelector('.control2').style.transform = `rotate(${beta}deg)`;
+    document.querySelector('.control3').style.transform = `rotate(${gamma}deg)`;
+  }
+</script>
+<script src="js/view.js"></script>
+<script src="$SOCKET_SERVER/socket.io/socket.io.js"></script>
+<script src="js/socket.js"></script>
+</body>
+</html>

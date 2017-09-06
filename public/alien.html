@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AWESOME COLOR PICKER</title>
+  <title>The Alien</title>
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
   <div class='eye-container outer'>
-    <div class="square square1"><div></div></div>
+    <div class="eye eye1"><div></div></div>
   </div>
   <div class='eye-container inner'>
-    <div class="square square2"><div></div></div>
+    <div class="eye eye2"><div></div></div>
   </div>
   <div class='eye-container outer'>
-    <div class="square square3"><div></div></div>
+    <div class="eye eye3"><div></div></div>
   </div>
   <div class="teeth"></div>
   <div class="chin"></div>
 <div class="result"></div>
 <script type="text/javascript">
   function updatePage(alpha, beta, gamma){
-    document.querySelector('.square1').style.transform = `rotate(${alpha * -1}deg)`;
-    document.querySelector('.square2').style.transform = `rotate(${beta}deg)`;
-    document.querySelector('.square3').style.transform = `rotate(${gamma}deg)`;
+    document.querySelector('.eye1').style.transform = `rotate(${alpha * -1}deg)`;
+    document.querySelector('.eye2').style.transform = `rotate(${beta}deg)`;
+    document.querySelector('.eye3').style.transform = `rotate(${gamma}deg)`;
   }
 </script>
 <script src="js/view.js"></script>

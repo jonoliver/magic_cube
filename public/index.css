@@ -62,7 +62,7 @@ body {
 }
 
 
-.square {
+.eye {
   height: 100px;
   width: 100px;
   border-radius: 100px;
@@ -74,7 +74,7 @@ body {
   border: 3px #398826 solid;
 }
 
-.square div {
+.eye div {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -141,4 +141,42 @@ body {
   background:rgba(144,153,102,.7);
   background:rgba(242, 255, 181,.7);
   transform:rotateX(90deg) translateZ(100px);
+}
+
+
+
+
+
+.control-container {
+  /*position: relative;
+  z-index: 4;
+  display: inline-block;
+  padding: 50px;
+  background: #2eca2e;
+  border-radius: 200px;
+  margin: 0 -48px;
+  border: 9px #398826 solid;*/
+}
+
+.control {
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  background: #FFF;
+  display: inline-block;
+  background: #333;
+  border: 3px #ffffff solid;
+  margin-top: 3rem;
+  /*opacity: .65;*/
+  /*box-shadow: 1px 1px 2rem #bbbbbb;*/
+  /*background: #FFF;*/
+}
+
+.control div {
+  position: absolute;
+  width: 6px;
+  height: 26px;
+  background: #FFF;
+  top: 6px;
+  right: 46px;
 }
