@@ -21,7 +21,9 @@ const replace = require('stream-replace');
 app.use(async (ctx, next) => {
   await next();
   if (!ctx.body) { return; }
-  ctx.body = ctx.body.pipe(replace(/\$SOCKET_SERVER/g, ROOTPATH));
+  if (ctx.body.path.endsWith('.html') || ctx.body.path.endsWith('.js')) {
+    ctx.body = ctx.body.pipe(replace(/\$SOCKET_SERVER/g, ROOTPATH));
+  }
 });
 
 // serve static files from public

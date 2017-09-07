@@ -14,7 +14,7 @@
     "nodemon": "^1.11.0"
   },
   "scripts": {
-    "start": "HOST=192.168.0.6 PORT=9000 ./node_modules/nodemon/bin/nodemon.js --watch server.js --inspect server.js"
+    "start": "HOST=192.168.0.6 PORT=9000 nodemon --watch server.js --inspect server.js"
   },
   "author": "",
   "license": "ISC"
