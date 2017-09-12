@@ -24,82 +24,10 @@
   <script src="js/view.js"></script>
   <script src="$SOCKET_SERVER/socket.io/socket.io.js"></script>
   <script src="js/socket.js"></script>
-  <script src="js/wad.min.js"></script>
-  <!-- <script>
+  <script src="js/sampler.js"></script>
+  <!-- <script src="js/wad.min.js"></script> -->
 
-  var wad = new Wad({
-  source : 'sine',
-  env: {
-  hold: 1,
-  attack: 0,
-  sustain: 0,
-  release: 0
-},
-tuna   : {
-Overdrive : {
-outputGain: 0.5,         //0 to 1+
-drive: 0.7,              //0 to 1
-curveAmount: 1,          //0 to 1
-algorithmIndex: 0,       //0 to 5, selects one of our drive algorithms
-bypass: 0
-},
-Chorus : {
-intensity: 0.3,  //0 to 1
-rate: 4,         //0.001 to 8
-stereoPhase: 0,  //0 to 180
-bypass: 0
-},
-Delay : {
-feedback: 0.45,    //0 to 1+
-delayTime: 150,    //1 to 10000 milliseconds
-wetLevel: 0.25,    //0 to 1+
-dryLevel: 1,       //0 to 1+
-cutoff: 2000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
-bypass: 0
-}
-}
-});
-// A, C, D, E, G
-const pitches = [220, 261.63, 293.66, 329.63, 392];
-const play = (p, i) => wad.play({ pitch: p, wait: 0 });
-pitches.forEach((p, i) => setTimeout(() => play(p), i*2000));
-
-</script> -->
 <script>
-var muted = false;
-var volume = 0;
-
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-var oscillator = audioCtx.createOscillator();
-var gainNode = audioCtx.createGain();
-
-oscillator.connect(gainNode);
-gainNode.connect(audioCtx.destination);
-
-oscillator.type = "sin";
-oscillator.frequency.value = 220;
-oscillator.start();
-
-// document.addEventListener("mousemove", updateTone);
-// document.addEventListener("mousemove", updateVisual);
-
-function updateTone(e) {
-  freq = e.pageX;
-  volume = e.pageY;
-  if (muted) return;
-  oscillator.frequency.value = freq;
-  gainNode.gain.value = volume;
-}
-
-// function updatePage(alpha, beta, gamma) {
-//   freq = beta + 200;
-//   volume = gamma;
-//   if (muted) return;
-//   oscillator.frequency.value = freq;
-//   // detuneVal = gamma*5;
-//   // gainNode.gain.value = volume;
-// }
 function updatePage(alpha, beta, gamma) {
   if (window.source) {
     // source.loopStart = beta + 1;
@@ -110,10 +38,11 @@ function updatePage(alpha, beta, gamma) {
     // source.playbackRate.value = gamma * 0.1;
     // console.log(gamma * 0.1, constrain((gamma * 0.1), -2, 0.2))
     source.playbackRate.value = constrain((gamma * 0.1), -1.2, 1);
-    volume.gain.value = constrain(beta * 0.1, 0, 1);
+    volume.gain.value = constrain(beta * 0.5, 0, 1);
     // source.playbackRate.value = proportion(alpha,5,360);
 
   }
+
 }
 
 function constrain(number, low, high){
@@ -122,145 +51,7 @@ function constrain(number, low, high){
   return number;
 }
 
-var vibratoRate = 75;
-var vibratoInterval = setInterval(vibrato, vibratoRate);
-
-var detuneVal = 3;
-var detuneMultiplier = 10;
-
-function vibrato() {
-  detuneMultiplier = detuneMultiplier * -1;
-  oscillator.detune.value = detuneVal * detuneMultiplier;
-}
-
-document.onkeydown = handleKey;
-// $("#volume").click(mute);
-
-function handleKey(e) {
-  e.preventDefault();
-  switch (e.key) {
-    case " ":
-    mute();
-    case "ArrowDown":
-    if (detuneVal > 0) detuneVal--;
-    console.log(detuneVal);
-    break;
-    case "ArrowUp":
-    detuneVal++;
-    console.log(detuneVal);
-    break;
-  }
-}
-
-function mute() {
-  muted = !muted;
-  if (muted) {
-    gainNode.gain.value = 0;
-    // $("#volume").removeClass("fa-volume-up").addClass("fa-volume-off");
-  } else {
-    gainNode.gain.value = volume;
-    // $("#volume").removeClass("fa-volume-off").addClass("fa-volume-up");
-  }
-}
-function updateVisual(e) {
-  pointer = $('<div class="tracer"></div>');
-
-  $(document.body).append(pointer);
-  pointer
-    .css({
-      position: "absolute",
-      top: e.pageY,
-      left: e.pageX,
-      width: 10,
-      height: 10,
-      borderRadius: 10
-    })
-    .animate({ width: 20, height: 20 })
-    .fadeOut(400, function() {
-      $(this).remove();
-    });
-}
-mute();
 </script>
-<script>
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-function play(){
-  // Create an empty three-second stereo buffer at the sample rate of the AudioContext
-  var myArrayBuffer = audioCtx.createBuffer(2, 10000, audioCtx.sampleRate);
-
-  // Fill the buffer with white noise;
-  // just random values between -1.0 and 1.0
-  for (var channel = 0; channel < myArrayBuffer.numberOfChannels; channel++) {
-  // This gives us the actual ArrayBuffer that contains the data
-  var nowBuffering = myArrayBuffer.getChannelData(channel);
-  for (var i = 0; i < myArrayBuffer.length; i++) {
-    // Math.random() is in [0; 1.0]
-    // audio needs to be in [-1.0; 1.0]
-    nowBuffering[i] = 0.00001 * i;
-  }
-  }
-
-  // Get an AudioBufferSourceNode.
-  // This is the AudioNode to use when we want to play an AudioBuffer
-  var source = audioCtx.createBufferSource();
-  // set the buffer in the AudioBufferSourceNode
-  source.buffer = myArrayBuffer;
-  // connect the AudioBufferSourceNode to the
-  // destination so we can hear the sound
-  source.connect(audioCtx.destination);
-  // start the source playing
-  source.start();
-
-}
-function shuffle(a) {
-    var j, x, i;
-    for (i = a.length; i; i--) {
-        j = Math.floor(Math.random() * i);
-        x = a[i - 1];
-        a[i - 1] = a[j];
-        a[j] = x;
-}
-}
-
-function cloneAudioBuffer(buffer){
-  const newBuffer = audioCtx.createBuffer(2, buffer.length, buffer.sampleRate);
-  newBuffer.copyToChannel(buffer.getChannelData(0),0,0);
-  newBuffer.copyToChannel(buffer.getChannelData(1),1,0);
-  reverseAudioBuffer(newBuffer);
-  console.log(newBuffer);
-  return newBuffer;
-}
-
-function reverseAudioBuffer(buffer){
-  Array.prototype.reverse.call( buffer.getChannelData(0) );
-  Array.prototype.reverse.call( buffer.getChannelData(1) );
-}
-  // setInterval(play, 1);
-// var buffer;
-fetch('revolution.mp3')
-  .then((response) => response.arrayBuffer())
-  .then((buffer) =>
-    audioCtx.decodeAudioData(buffer, function(decodedData) {
-      // shuffle(decodedData.getChannelData(0))
-      // shuffle(decodedData.getChannelData(1))
-      console.log(decodedData);
-      window.source = audioCtx.createBufferSource();
-      // Array.prototype.reverse.call( decodedData.getChannelData(0) );
-      // Array.prototype.reverse.call( decodedData.getChannelData(1) );
-      window.buffer = decodedData;
-      // window.buffer2 = cloneAudioBuffer(decodedData);
-      source.buffer = decodedData;
-
-      window.volume = audioCtx.createGain();
-      source.connect(volume);
-      volume .connect(audioCtx.destination);
-      // source.connect(audioCtx.destination);
-      // start the source playing
-      source.loop = true;
-      source.start();
-    }));
-// console.log(b);
-</script>
 </body>
 </html>
