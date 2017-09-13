@@ -3,7 +3,7 @@ var volume = 0;
 
 var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-var oscillator = audioCtx.createOscillator();
+window.oscillator = audioCtx.createOscillator();
 var gainNode = audioCtx.createGain();
 
 oscillator.connect(gainNode);
@@ -37,12 +37,14 @@ function updateTone(e) {
 var vibratoRate = 75;
 var vibratoInterval = setInterval(vibrato, vibratoRate);
 
-var detuneVal = 3;
+window.detuneVal = 15;
+
 var detuneMultiplier = 10;
 
 function vibrato() {
   detuneMultiplier = detuneMultiplier * -1;
   oscillator.detune.value = detuneVal * detuneMultiplier;
+  // console.log(oscillator.detune.value);
 }
 
 document.onkeydown = handleKey;
@@ -92,7 +94,7 @@ function updateVisual(e) {
       $(this).remove();
     });
 }
-mute();
+// mute();
 
 
 // var wad = new Wad({

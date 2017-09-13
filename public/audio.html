@@ -25,24 +25,23 @@
   <script src="$SOCKET_SERVER/socket.io/socket.io.js"></script>
   <script src="js/socket.js"></script>
   <script src="js/sampler.js"></script>
+  <!-- <script src="js/oscillator.js"></script> -->
   <!-- <script src="js/wad.min.js"></script> -->
 
 <script>
 function updatePage(alpha, beta, gamma) {
   if (window.source) {
-    // source.loopStart = beta + 1;
-    // source.loopEnd = beta + 1.5;
     rate = Math.abs(beta * 0.1 * 0.25)
-    // console.log(rate)
-    // source.playbackRate.value = rate;
-    // source.playbackRate.value = gamma * 0.1;
-    // console.log(gamma * 0.1, constrain((gamma * 0.1), -2, 0.2))
     source.playbackRate.value = constrain((gamma * 0.1), -1.2, 1);
     volume.gain.value = constrain(beta * 0.5, 0, 1);
-    // source.playbackRate.value = proportion(alpha,5,360);
-
   }
 
+  if (window.oscillator) {
+    const freq = beta*3+200;
+    if (muted) return;
+    oscillator.frequency.value = freq;
+    detuneVal = gamma*5;
+  }
 }
 
 function constrain(number, low, high){
