@@ -11,7 +11,7 @@ const app = new Koa();
 // Reload connected browsers when public files change
 app.use(require('koa-browser-sync')({
   init: true,
-  files: 'public/*/**',
+  files: 'public/**/*',
   notify: false
 }));
 
