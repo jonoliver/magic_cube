@@ -20,7 +20,7 @@
   <div class="chin"></div>
 <div class="result"></div>
 <script type="text/javascript">
-  function updatePage(alpha, beta, gamma){
+  function updateFromMobileOrientation({ alpha, beta, gamma }){
     document.querySelector('.eye1').style.transform = `rotate(${alpha * -1}deg)`;
     document.querySelector('.eye2').style.transform = `rotate(${beta}deg)`;
     document.querySelector('.eye3').style.transform = `rotate(${gamma}deg)`;

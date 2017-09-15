@@ -3,54 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Controls</title>
+  <title>The Cube</title>
   <link rel="stylesheet" href="index.css" />
-  <style>
-  body {background: #687f94 !important;}
-  </style>
 </head>
 <body>
-  <div class="control control1"><div></div></div>
-  <div class="control control2"><div></div></div>
-  <div class="control control3"><div></div></div>
+  <div class="cube">
+    <div class="side1"></div>
+    <div class="side2"></div>
+    <div class="side3"></div>
+    <div class="side4"></div>
+    <div class="side5"></div>
+    <div class="side6"></div>
+  </div>
   <div class="result"></div>
   <script type="text/javascript">
-  // function updatePage(alpha, beta, gamma){
-  //   document.querySelector('.control1').style.transform = `rotate(${alpha * -1}deg)`;
-  //   document.querySelector('.control2').style.transform = `rotate(${beta}deg)`;
-  //   document.querySelector('.control3').style.transform = `rotate(${gamma}deg)`;
-  // }
+    function updateFromMobileOrientation(data){
+      view.updateCube(data);
+      if (sampler) { sampler.update(data) }
+    }
+
+    function updateFromMobileTap(){
+      view.updateColorSelection();
+    }
+    // MOBILE ONLY
+    // TODO: check for mobile device
+    window.addEventListener('deviceorientation', (data) => {
+      view.updateCube(data);
+    });
   </script>
-  <script src="js/view.js"></script>
   <script src="$SOCKET_SERVER/socket.io/socket.io.js"></script>
   <script src="js/socket.js"></script>
+  <script src="js/view.js"></script>
   <script src="js/sampler.js"></script>
-  <!-- <script src="js/oscillator.js"></script> -->
-  <!-- <script src="js/wad.min.js"></script> -->
-
-<script>
-function updatePage(alpha, beta, gamma) {
-  if (window.source) {
-    rate = Math.abs(beta * 0.1 * 0.25)
-    source.playbackRate.value = constrain((gamma * 0.1), -1.2, 1);
-    volume.gain.value = constrain(beta * 0.5, 0, 1);
-  }
-
-  if (window.oscillator) {
-    const freq = beta*3+200;
-    if (muted) return;
-    oscillator.frequency.value = freq;
-    detuneVal = gamma*5;
-  }
-}
-
-function constrain(number, low, high){
-  if (number < low) return low;
-  if (number > high) return high;
-  return number;
-}
-
-</script>
-
 </body>
 </html>

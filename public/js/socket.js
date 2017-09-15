@@ -5,7 +5,7 @@ socket.on('connect', function(){  console.log('connected');});
 socket.on('disconnect', function(){});
 
 // DESKTOP ONLY
-socket.on('update', renderFromOrientationData);
+socket.on('update', updateFromMobileOrientation);
 
 // MOBILE ONLY
 // TODO: check for mobile device
@@ -15,7 +15,7 @@ window.addEventListener('deviceorientation', (e) => {
 });
 
 // shared functionality
-socket.on('tap', updateColorSelection);
+socket.on('tap', view.updateColorSelection);
 
 document.addEventListener('click', () => {
   socket.emit('tap');

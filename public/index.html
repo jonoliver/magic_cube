@@ -25,22 +25,23 @@
 </div> -->
 <div class="result"></div>
 <script type="text/javascript">
-  function updatePage(alpha, beta, gamma){
-    document.querySelector('.cube').style.transform = `rotateX(${(beta - 70) * -1}deg) rotateY(${gamma}deg) rotateZ(${alpha * -1}deg`;
+  function updateFromMobileOrientation(data){
+    view.updateCube(data);
+    view.updateBackgroundColor(data);
   }
   // MOBILE ONLY
   // TODO: check for mobile device
-  window.addEventListener('deviceorientation', (e) => {
-    const { alpha, beta, gamma } = e;
-    renderFromOrientationData(e);
+  window.addEventListener('deviceorientation', (data) => {
+    view.updateCube(data);
+    view.updateBackgroundColor(data);
   });
 
   document.addEventListener('click', () => {
-    updateColorSelection();
+    view.updateColorSelection();
   });
 </script>
-<script src="js/view.js"></script>
 <script src="$SOCKET_SERVER/socket.io/socket.io.js"></script>
 <script src="js/socket.js"></script>
+<script src="js/view.js"></script>
 </body>
 </html>

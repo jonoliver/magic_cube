@@ -15,7 +15,7 @@
   <div class="control control3"><div></div></div>
 <div class="result"></div>
 <script type="text/javascript">
-  function updatePage(alpha, beta, gamma){
+  function updateFromMobileOrientation({ alpha, beta, gamma }){
     document.querySelector('.control1').style.transform = `rotate(${alpha * -1}deg)`;
     document.querySelector('.control2').style.transform = `rotate(${beta}deg)`;
     document.querySelector('.control3').style.transform = `rotate(${gamma}deg)`;
