@@ -33,8 +33,8 @@ window.view = (() => {
   }
 
   return {
-    updateCube: updateCube,
-    updateBackgroundColor: updateBackgroundColor,
-    updateColorSelection, updateColorSelection,
+    updateCube,
+    updateBackgroundColor,
+    updateColorSelection,
   }
 })();

@@ -1,8 +1,12 @@
 window.sampler = (() => {
-  const sample = 'valz.mp3';
+  // const sample = 'valz.mp3';
+  const sample = 'revolution.mp3';
+
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const source = audioCtx.createBufferSource();
   const volume = audioCtx.createGain();
+
+  const { constrain, constrainedRateFromValue } = window.Util;
 
   fetch(sample)
   .then((response) => response.arrayBuffer())
@@ -19,18 +23,11 @@ window.sampler = (() => {
   const update = (data) => {
     const { alpha, beta, gamma } = data;
     if (source) {
+      // const constrainedFactor = constrainedRateFromValue(gamma, [-12, 10], [-1.2, 1]);
       source.playbackRate.value = constrain((gamma * 0.1), -1.2, 1);
       volume.gain.value = constrain(beta * 0.5, 0, 1);
     }
   }
 
-  function constrain(number, low, high){
-    if (number < low) return low;
-    if (number > high) return high;
-    return number;
-  }
-
-  return {
-    update: update,
-  }
+  return { update }
 })();

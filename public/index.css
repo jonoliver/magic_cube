@@ -5,7 +5,6 @@ body {
   font-size: 5rem;
   font-weight: bold;
   color: #FFF;
-  opacity: .65;
 }
 .eye-container {
   position: relative;
@@ -179,4 +178,45 @@ body {
   background: #FFF;
   top: 6px;
   right: 46px;
+}
+
+body.audio {
+  background: #FFF;
+}
+
+.record-container {
+  width: 300px;
+  height: 300px;
+}
+.record {
+  width: 300px;
+  height: 300px;
+  border-radius: 300px;
+  background:
+  radial-gradient(white 2%, red 2%, red 22%, black 22%, black 27%, transparent 27%, transparent 37%, black 37%,black 37.5%, transparent 37.5%, transparent 49%, black 49%, black 49.5%, transparent 49.5%,transparent 55%, black 56%, black 49.5%, transparent 49.5%, transparent 69%, black 69%),
+  linear-gradient(35deg, black 35%, transparent 68%),
+  linear-gradient(50deg, #e3e3e3 50%, transparent 60%),
+  black;
+  /*animation: rotation 1.8s infinite linear;*/
+}
+/*radial-gradient(white 2%, red 2%, red 22%, black 22%, black 27%, transparent 27%, transparent 37%, black 37%,black 37.5%, transparent 37.5%, transparent 49%, black 49%, black 49.5%, transparent 49.5%,transparent 55%, black 56%, black 49.5%, transparent 49.5%, transparent 69%, black 69%),   linear-gradient(30deg, black 40%, transparent 60%),   linear-gradient(90deg, #7c7c7c 40%, transparent 60%),   black*/
+/*
+  linear-gradient(75deg, black 14%, transparent 53%),
+  linear-gradient(50deg, black 30%, transparent 53%),
+  linear-gradient(40deg, #8e8e8e 50%, transparent 63%),
+  linear-gradient(57deg, #dedede 50%, transparent 81%),
+*/
+
+
+img {
+  /*animation: rotation 1.8s infinite linear;*/
+
+}
+@keyframes rotation {
+		from {
+				transform: rotate(0deg);
+		}
+		to {
+				transform: rotate(359deg);
+		}
 }

@@ -6,7 +6,7 @@
   <title>The Cube</title>
   <link rel="stylesheet" href="index.css" />
 </head>
-<body>
+<body class="audio">
   <div class="cube">
     <div class="side1"></div>
     <div class="side2"></div>
@@ -15,10 +15,22 @@
     <div class="side5"></div>
     <div class="side6"></div>
   </div>
+  <div class="record-container">
+    <div class="record">
+      <!-- <p>Yo!</p> -->
+    </div>
+  </div>
   <div class="result"></div>
+  <script src="js/util.js"></script>
   <script type="text/javascript">
+    let factor = 33.333333333333;
+    function updateRecord({alpha, beta, gamma}){
+      factor = gamma;
+      // document.querySelector('.record-container').style.transform = `rotate(${gamma}deg)`
+    }
     function updateFromMobileOrientation(data){
-      view.updateCube(data);
+      updateRecord(data);
+      // view.updateCube(data);
       if (sampler) { sampler.update(data) }
     }
 
@@ -30,6 +42,38 @@
     window.addEventListener('deviceorientation', (data) => {
       view.updateCube(data);
     });
+
+    const constrainedRateFromValue = (input, inputLimits, outputLimits) => {
+      const [inputLow, inputHigh] = inputLimits;
+      const [outputLow, outputHigh] = outputLimits;
+      const isPos = (input > 0);
+      const value = constrain(input, inputLow, inputHigh);
+      const inputLimit = isPos ? inputHigh : inputLow;
+      const outputLimit = isPos ? outputHigh : outputLow;
+      return value * outputLimit / inputLimit;// * (isPos ? 1 : -1);
+    }
+
+    let $record = document.querySelector('.record');
+    let position = 0;
+    let i = 0;
+    function recurse(time=0){
+      const { constrain } = window.Util;
+      // const constrainedFactor = constrain(factor, -33.33, 33.33);
+      // const constrainedFactor = constrain(factor, -33.33, 33.33);
+
+      const value = constrain(factor, -12, 10);
+      const [low, high] = [-33.33, 33.33]
+      const isPos = (factor > 0);
+      const limit = isPos ? high : low;
+      const constrainedFactor = value * limit / 10 * (isPos ? 1 : -1);
+      const speed = 60 / constrainedFactor / 360 * 1000
+      let inc = ((time - i) / speed);
+      i = time;
+      position = position + inc;
+      $record.style.transform = `rotate(${position}deg)`;
+      window.requestAnimationFrame(recurse);
+    }
+    recurse();
   </script>
   <script src="$SOCKET_SERVER/socket.io/socket.io.js"></script>
   <script src="js/socket.js"></script>
