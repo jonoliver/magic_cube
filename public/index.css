@@ -1,3 +1,5 @@
+html, body { height: 100%; }
+
 body {
   background: #000;
   text-align: center;
@@ -181,7 +183,8 @@ body {
 }
 
 body.audio {
-  background: #FFF;
+  display: flex;
+  background: #4a7e8b;
 }
 
 .record-container {
@@ -191,6 +194,7 @@ body.audio {
 .record {
   width: 300px;
   height: 300px;
+  margin: auto;
   border-radius: 300px;
   background:
   radial-gradient(white 2%, red 2%, red 22%, black 22%, black 27%, transparent 27%, transparent 37%, black 37%,black 37.5%, transparent 37.5%, transparent 49%, black 49%, black 49.5%, transparent 49.5%,transparent 55%, black 56%, black 49.5%, transparent 49.5%, transparent 69%, black 69%),
